@@ -88,7 +88,7 @@ class UserController extends Controller
                 $this->jsonResponse(['error' => 'Invalid credentials'], 401);
             }
         } catch (PDOException $e) {
-            $this.jsonResponse(['error' => 'Database error: ' . $e->getMessage()], 500);
+            $this->jsonResponse(['error' => 'Database error: ' . $e->getMessage()], 500);
         }
     }
 

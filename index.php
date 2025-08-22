@@ -87,10 +87,23 @@
                 </div>
             </div>
             <div class="player-controls">
-                <!-- Player controls will go here -->
+                <div class="buttons">
+                    <button id="rewind-btn" class="control-btn">-10s</button>
+                    <button id="play-pause-btn" class="control-btn play">Play</button>
+                    <button id="forward-btn" class="control-btn">+30s</button>
+                </div>
+                <div class="progress-container">
+                    <span id="current-time">0:00</span>
+                    <input type="range" id="progress-bar" value="0" min="0" max="100">
+                    <span id="duration-time">0:00</span>
+                </div>
+            </div>
+            <div class="volume-controls">
+                <span id="volume-icon">🔊</span>
+                <input type="range" id="volume-slider" value="100" min="0" max="100">
             </div>
             <div class="waveform-visualizer">
-                <!-- 3D waveform visualizer will go here -->
+                <canvas id="waveform-canvas"></canvas>
             </div>
         </div>
     </div>
