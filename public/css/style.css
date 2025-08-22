@@ -269,9 +269,39 @@ body, html {
     transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.play-button:hover {
-    background-color: #fff;
-    box-shadow: 0 0 10px #00ffff;
+.panel-footer .actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.panel-footer .actions button {
+    background: none;
+    border: 1px solid rgba(0, 255, 255, 0.5);
+    color: rgba(0, 255, 255, 0.7);
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.panel-footer .actions button:hover {
+    background: rgba(0, 255, 255, 0.1);
+    color: #00ffff;
+    border-color: #00ffff;
+}
+
+.favorite-btn {
+    font-size: 1.5em;
+    padding: 0 8px;
+    color: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.favorite-btn.is-favorite {
+    color: #ff00ff; /* Neon pink for favorite */
+    border-color: #ff00ff;
+    text-shadow: 0 0 10px #ff00ff;
 }
 
 .placeholder-text {

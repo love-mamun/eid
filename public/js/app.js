@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- State ---
     let currentUser = null;
     let episodesCache = [];
+    let userFavorites = new Set();
     const audio = new Audio();
     let animationFrameId;
 
@@ -126,19 +127,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- UI Update & Event Handlers ---
+    async function loadFavorites() {
+        if (!currentUser) return;
+        try {
+            const response = await fetch('/api/v1/favorites');
+            const favorites = await response.json();
+            userFavorites = new Set(favorites.map(fav => fav.id));
+            // We need to re-render episodes to show the correct favorite status
+            displayEpisodes(episodesCache);
+        } catch (error) {
+            console.error('Failed to load favorites:', error);
+        }
+    }
+
+    async function handleFavoriteToggle(episodeId, button) {
+        if (!currentUser) {
+            alert('Please log in to favorite episodes.');
+            return;
+        }
+        try {
+            const response = await fetch(`/api/v1/episodes/${episodeId}/favorite`, { method: 'POST' });
+            const result = await response.json();
+            if (response.ok) {
+                if (result.status === 'added') {
+                    userFavorites.add(episodeId);
+                    button.classList.add('is-favorite');
+                } else {
+                    userFavorites.delete(episodeId);
+                    button.classList.remove('is-favorite');
+                }
+            }
+        } catch (error) {
+            console.error('Failed to toggle favorite:', error);
+        }
+    }
+
     function updateUIForLogin(user) {
         currentUser = user;
         userProfileDiv.innerHTML = `<span class="username">Welcome, ${user.username}</span><button id="logout-btn" class="glow-button">Logout</button>`;
         if (user.role === 'admin') setupAdminUI();
         document.getElementById('logout-btn').addEventListener('click', handleLogout);
+        loadFavorites();
     }
 
     function updateUIForLogout() {
         currentUser = null;
+        userFavorites.clear();
         userProfileDiv.innerHTML = `<button id="login-btn" class="glow-button">Login</button>`;
         document.getElementById('login-btn').addEventListener('click', () => authModal.style.display = 'flex');
         const adminControls = document.getElementById('admin-controls');
         if (adminControls) adminControls.remove();
+        // Re-render episodes to remove favorite statuses
+        displayEpisodes(episodesCache);
     }
 
     function setupAdminUI() {
@@ -151,56 +191,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Episode Loading ---
     function displayEpisodes(episodes) {
-        episodesCache = episodes;
         contentArea.innerHTML = '';
-        if (episodes.length === 0) {
+        if (!episodes || episodes.length === 0) {
             contentArea.innerHTML = '<p class="placeholder-text">No episodes available.</p>';
             return;
         }
+
+        episodesCache = episodes;
         episodes.forEach(episode => {
+            const isFavorite = userFavorites.has(episode.id);
             const panel = document.createElement('div');
             panel.className = 'episode-panel';
-            panel.innerHTML = `...`; // Keep existing innerHTML for brevity
+            panel.innerHTML = `
+                <div class="panel-header">
+                    <h3 class="panel-title">${episode.title}</h3>
+                    <span class="panel-author">by ${episode.author_name}</span>
+                </div>
+                <p class="panel-description">${episode.description || ''}</p>
+                <div class="panel-footer">
+                    <div class="actions">
+                        <button class="play-button" title="Play">▶</button>
+                        <button class="favorite-btn ${isFavorite ? 'is-favorite' : ''}" title="Favorite">♥</button>
+                        <button class="add-to-playlist-btn" title="Add to playlist">+</button>
+                    </div>
+                    <span class="duration">Duration: ${Math.floor(episode.duration / 60)} min</span>
+                </div>
+            `;
             panel.querySelector('.play-button').addEventListener('click', () => loadTrack(episode));
+            panel.querySelector('.favorite-btn').addEventListener('click', (e) => handleFavoriteToggle(episode.id, e.target));
+            panel.querySelector('.add-to-playlist-btn').addEventListener('click', () => alert('Playlist functionality coming soon!'));
             contentArea.appendChild(panel);
         });
     }
-
-    // The rest of the file remains the same, including form handlers and initial load calls
-    // For brevity, I'm omitting the duplicated code from the previous read_file output.
-    // The logic below is assumed to be present and correct.
 
     async function loadEpisodes() {
         try {
             const response = await fetch('/api/v1/episodes');
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             const episodes = await response.json();
-
-            // Re-implementation of displayEpisodes to avoid duplicating the large innerHTML string
-            episodesCache = episodes;
-            contentArea.innerHTML = '';
-            if (episodes.length === 0) {
-                contentArea.innerHTML = '<p class="placeholder-text">No episodes available.</p>';
-                return;
-            }
-            episodes.forEach(episode => {
-                const panel = document.createElement('div');
-                panel.className = 'episode-panel';
-                panel.innerHTML = `
-                    <div class="panel-header">
-                        <h3 class="panel-title">${episode.title}</h3>
-                        <span class="panel-author">by ${episode.author_name}</span>
-                    </div>
-                    <p class="panel-description">${episode.description}</p>
-                    <div class="panel-footer">
-                        <span class="duration">Duration: ${Math.floor(episode.duration / 60)} min</span>
-                        <button class="play-button">Play</button>
-                    </div>
-                `;
-                panel.querySelector('.play-button').addEventListener('click', () => loadTrack(episode));
-                contentArea.appendChild(panel);
-            });
-
+            displayEpisodes(episodes);
         } catch (error) {
             console.error('Failed to load episodes:', error);
             contentArea.innerHTML = '<p class="placeholder-text">Failed to load episodes.</p>';

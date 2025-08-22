@@ -38,5 +38,17 @@ $router->add('episodes', 'EpisodeController::create', 'POST');
 $router->add('episodes/(\d+)', 'EpisodeController::update', 'PUT');
 $router->add('episodes/(\d+)', 'EpisodeController::delete', 'DELETE');
 
+// Favorite routes
+$router->add('favorites', 'FavoriteController::index', 'GET');
+$router->add('episodes/(\d+)/favorite', 'FavoriteController::toggle', 'POST');
+
+// Playlist routes
+$router->add('playlists', 'PlaylistController::index', 'GET');
+$router->add('playlists', 'PlaylistController::create', 'POST');
+$router->add('playlists/(\d+)', 'PlaylistController::show', 'GET');
+$router->add('playlists/(\d+)', 'PlaylistController::delete', 'DELETE');
+$router->add('playlists/(\d+)/episodes', 'PlaylistController::addEpisode', 'POST');
+$router->add('playlists/(\d+)/episodes/(\d+)', 'PlaylistController::removeEpisode', 'DELETE');
+
 // Dispatch the router
 $router->dispatch(isset($_GET['url']) ? $_GET['url'] : '');
