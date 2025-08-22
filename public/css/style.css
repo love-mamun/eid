@@ -1,0 +1,209 @@
+/* Basic Reset & Body Styling */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    background-color: #0d0d2b;
+    color: #fff;
+    overflow: hidden;
+}
+
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #1a1a3a, #0d0d2b, #1a1a3a);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    z-index: -1;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Main Container */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Header */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: rgba(1, 1, 10, 0.5);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.1);
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+}
+
+.main-nav .nav-item {
+    margin: 0 20px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.1em;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.main-nav .nav-item:hover, .main-nav .nav-item.active {
+    color: #00ffff;
+    text-shadow: 0 0 5px #00ffff;
+}
+
+.user-profile .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #00ffff;
+}
+
+/* Content Area */
+.content-area {
+    flex-grow: 1;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+/* Quick Play Bar */
+.quick-play-bar {
+    display: flex;
+    align-items: center;
+    padding: 15px 40px;
+    background: rgba(1, 1, 10, 0.7);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(0, 255, 255, 0.2);
+    box-shadow: 0 -5px 15px rgba(0, 255, 255, 0.1);
+}
+
+.episode-info {
+    display: flex;
+    align-items: center;
+}
+
+.episode-info .thumbnail {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    border-radius: 5px;
+}
+
+.episode-info .details .title {
+    font-weight: bold;
+}
+
+.episode-info .details .artist {
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+/* Buttons */
+.glow-button {
+    background-color: transparent;
+    border: 2px solid #00ffff;
+    color: #00ffff;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    text-shadow: 0 0 5px #00ffff;
+}
+
+.glow-button:hover {
+    background-color: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 15px #00ffff;
+}
+
+/* Auth Modal */
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: rgba(1, 1, 10, 0.8);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 10px;
+    padding: 30px;
+    width: 400px;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.tab-links .tab-link {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.2em;
+    margin-right: 20px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.tab-links .tab-link.active {
+    color: #00ffff;
+    text-shadow: 0 0 5px #00ffff;
+    opacity: 1;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+#login-form input, #register-form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    color: #fff;
+    border-radius: 5px;
+}
+
+#login-form input::placeholder, #register-form input::placeholder {
+    color: #ccc;
+}
