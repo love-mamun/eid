@@ -76,7 +76,13 @@ class UserController extends Controller
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['role'] = $user['role'];
 
-                $this->jsonResponse(['message' => 'Login successful']);
+                $this->jsonResponse([
+                    'message' => 'Login successful',
+                    'user' => [
+                        'username' => $user['username'],
+                        'role' => $user['role']
+                    ]
+                ]);
             } else {
                 // Bad credentials
                 $this->jsonResponse(['error' => 'Invalid credentials'], 401);

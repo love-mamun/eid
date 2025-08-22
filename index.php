@@ -58,6 +58,26 @@
             </div>
         </div>
 
+        <!-- Admin Episode Modal -->
+        <div id="episode-modal" class="modal-container" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="episode-modal-title">Add New Episode</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="episode-form">
+                        <input type="hidden" name="id">
+                        <input type="text" name="title" placeholder="Episode Title" required>
+                        <textarea name="description" placeholder="Episode Description"></textarea>
+                        <input type="text" name="file_path" placeholder="Audio File Path or URL" required>
+                        <input type="number" name="duration" placeholder="Duration (in seconds)" required>
+                        <button type="submit" class="glow-button">Save Episode</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="quick-play-bar">
             <div class="episode-info">
                 <img src="public/img/episode-thumbnail.png" alt="Episode Thumbnail" class="thumbnail">

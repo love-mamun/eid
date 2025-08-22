@@ -207,3 +207,115 @@ body, html {
 #login-form input::placeholder, #register-form input::placeholder {
     color: #ccc;
 }
+
+/* Episode Panels */
+.episode-panel {
+    background: rgba(1, 1, 10, 0.6);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(5px);
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.episode-panel:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    transform: translateY(-5px);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+}
+
+.panel-title {
+    margin: 0;
+    font-size: 1.5em;
+    color: #00ffff;
+}
+
+.panel-author {
+    font-size: 0.9em;
+    color: #aaa;
+}
+
+.panel-description {
+    margin-bottom: 15px;
+    color: #ddd;
+}
+
+.panel-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.duration {
+    font-size: 0.9em;
+    color: #aaa;
+}
+
+.play-button {
+    background-color: #00ffff;
+    color: #0d0d2b;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.play-button:hover {
+    background-color: #fff;
+    box-shadow: 0 0 10px #00ffff;
+}
+
+.placeholder-text {
+    color: #aaa;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+/* User Profile & Admin Controls */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-profile .username {
+    font-weight: bold;
+}
+
+#admin-controls {
+    border-left: 1px solid rgba(0, 255, 255, 0.3);
+    padding-left: 15px;
+}
+
+/* Modal Form Fields */
+.modal-content form input,
+.modal-content form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    color: #fff;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+.modal-content form textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.modal-content form input::placeholder,
+.modal-content form textarea::placeholder {
+    color: #ccc;
+}
