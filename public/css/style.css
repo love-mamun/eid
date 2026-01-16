@@ -1,0 +1,450 @@
+/* Basic Reset & Body Styling */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    background-color: #0d0d2b;
+    color: #fff;
+    overflow: hidden;
+}
+
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #1a1a3a, #0d0d2b, #1a1a3a);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    z-index: -1;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Main Container */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Header */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: rgba(1, 1, 10, 0.5);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.1);
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+}
+
+.main-nav .nav-item {
+    margin: 0 20px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.1em;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.main-nav .nav-item:hover, .main-nav .nav-item.active {
+    color: #00ffff;
+    text-shadow: 0 0 5px #00ffff;
+}
+
+.user-profile .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #00ffff;
+}
+
+/* Content Area */
+.content-area {
+    flex-grow: 1;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+/* Quick Play Bar */
+.quick-play-bar {
+    display: flex;
+    align-items: center;
+    padding: 15px 40px;
+    background: rgba(1, 1, 10, 0.7);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(0, 255, 255, 0.2);
+    box-shadow: 0 -5px 15px rgba(0, 255, 255, 0.1);
+}
+
+.episode-info {
+    display: flex;
+    align-items: center;
+}
+
+.episode-info .thumbnail {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    border-radius: 5px;
+}
+
+.episode-info .details .title {
+    font-weight: bold;
+}
+
+.episode-info .details .artist {
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+/* Buttons */
+.glow-button {
+    background-color: transparent;
+    border: 2px solid #00ffff;
+    color: #00ffff;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    text-shadow: 0 0 5px #00ffff;
+}
+
+.glow-button:hover {
+    background-color: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 15px #00ffff;
+}
+
+/* Auth Modal */
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: rgba(1, 1, 10, 0.8);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 10px;
+    padding: 30px;
+    width: 400px;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.tab-links .tab-link {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.2em;
+    margin-right: 20px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.tab-links .tab-link.active {
+    color: #00ffff;
+    text-shadow: 0 0 5px #00ffff;
+    opacity: 1;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+#login-form input, #register-form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    color: #fff;
+    border-radius: 5px;
+}
+
+#login-form input::placeholder, #register-form input::placeholder {
+    color: #ccc;
+}
+
+/* Episode Panels */
+.episode-panel {
+    background: rgba(1, 1, 10, 0.6);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(5px);
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.episode-panel:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    transform: translateY(-5px);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+}
+
+.panel-title {
+    margin: 0;
+    font-size: 1.5em;
+    color: #00ffff;
+}
+
+.panel-author {
+    font-size: 0.9em;
+    color: #aaa;
+}
+
+.panel-description {
+    margin-bottom: 15px;
+    color: #ddd;
+}
+
+.panel-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.duration {
+    font-size: 0.9em;
+    color: #aaa;
+}
+
+.play-button {
+    background-color: #00ffff;
+    color: #0d0d2b;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.panel-footer .actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.panel-footer .actions button {
+    background: none;
+    border: 1px solid rgba(0, 255, 255, 0.5);
+    color: rgba(0, 255, 255, 0.7);
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.panel-footer .actions button:hover {
+    background: rgba(0, 255, 255, 0.1);
+    color: #00ffff;
+    border-color: #00ffff;
+}
+
+.favorite-btn {
+    font-size: 1.5em;
+    padding: 0 8px;
+    color: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.favorite-btn.is-favorite {
+    color: #ff00ff; /* Neon pink for favorite */
+    border-color: #ff00ff;
+    text-shadow: 0 0 10px #ff00ff;
+}
+
+.placeholder-text {
+    color: #aaa;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+/* User Profile & Admin Controls */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-profile .username {
+    font-weight: bold;
+}
+
+#admin-controls {
+    border-left: 1px solid rgba(0, 255, 255, 0.3);
+    padding-left: 15px;
+}
+
+/* Modal Form Fields */
+.modal-content form input,
+.modal-content form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    color: #fff;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+.modal-content form textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.modal-content form input::placeholder,
+.modal-content form textarea::placeholder {
+    color: #ccc;
+}
+
+/* Player Controls */
+.quick-play-bar {
+    gap: 20px;
+}
+
+.player-controls {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.player-controls .buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    color: #00ffff;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: text-shadow 0.3s;
+}
+
+.control-btn:hover {
+    text-shadow: 0 0 10px #00ffff;
+}
+
+.control-btn.play {
+    font-size: 2.2em; /* Make play button bigger */
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.progress-container span {
+    font-size: 0.9em;
+    color: #aaa;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    flex-grow: 1;
+    height: 5px;
+    background: rgba(0, 255, 255, 0.3);
+    outline: none;
+    border-radius: 5px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #00ffff;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ffff;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    background: #00ffff;
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+}
+
+.volume-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.volume-controls input[type="range"] {
+    width: 100px;
+}
+
+/* Waveform Visualizer */
+.waveform-visualizer {
+    width: 200px;
+    height: 50px;
+}
+
+#waveform-canvas {
+    width: 100%;
+    height: 100%;
+}
